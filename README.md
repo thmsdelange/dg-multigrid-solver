@@ -9,7 +9,7 @@ This code was developed as part of my master's assignment titled "[Towards an Ef
 The code can be installed by cloning this repository and running `python -m pip install -r requirements.txt` to install the dependencies. The code was written in Python 3.10 and should therefore be compatible with Python versions `>=3.10`.
 
 ## Usage
-The case needs to be set up in a paramfile. In this file, information about the grid, solver, problem, visualization and some other things need to be set. Also, ParaView can be opened automatically to visualize the results by specifying the location to the ParaView executable in the paramfile. An example for the paramfile is given in `paramfile.yml`.
+The case needs to be set up in a paramfile. In this file, information about the grid, solver, problem, visualization and some other things need to be set. The grid files are in Plot3D format (`.xyz`) and some examples are given in the `/input` folder. Also, ParaView can be opened automatically to visualize the results by specifying the location to the ParaView executable in the paramfile. An example for the paramfile is given in `paramfile.yml`.
 
 Once the case is set up using the paramfile, the program can be run by executing `python -m dgfem` and specifying an option for the solver (see below). For example, if the multigrid solver is set up in the paramfile (only possible for the Poisson problem), solving the case using the multigrid algorithm can be done by `python -m dgfem -m`.
 
