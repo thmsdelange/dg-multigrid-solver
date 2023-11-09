@@ -207,7 +207,7 @@ class Relaxation:
             amg_relax.block_gauss_seidel(A=grid.BSR, x=u, b=RHS, iterations=1, sweep=direction, blocksize=grid.BSR.blocksize[0])
             residual = compute_Lp_norm(RHS - grid.BSR @ u, 2)/residual_0
             residuals.append(residual)
-            print(f"The residual (normalised) after {n} sweeps is {residual:.6e}")
+            # print(f"The residual (normalised) after {n} sweeps is {residual:.6e}")
             if residual<1e-6:
                 print(f"Residual reduced by 6 orders in {n+1} sweeps")
                 break
@@ -269,7 +269,7 @@ class Relaxation:
 
                 residual = compute_Lp_norm(RHS - BSR_0 @ u, 2)/residual_0
                 residuals.append(residual)
-                print(f"The residual (normalised) after {n} sweeps is {residual:.6e}")
+                # print(f"The residual (normalised) after {n} sweeps is {residual:.6e}")
                 if residual<1e-6:
                     print(f"Residual reduced by 6 orders in {n} sweeps")
                     break
@@ -318,7 +318,7 @@ class Relaxation:
 
                 residual = compute_Lp_norm(RHS - BSR_0 @ u, 2)/residual_0
                 residuals.append(residual)
-                print(f"The residual (normalised) after {n} sweeps is {residual:.6e}")
+                # print(f"The residual (normalised) after {n} sweeps is {residual:.6e}")
                 if residual<1e-6:
                     print(f"Residual reduced by 6 orders in {n} sweeps")
                     break

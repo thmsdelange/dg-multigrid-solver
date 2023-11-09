@@ -1,7 +1,7 @@
 grid:
   folder: input
-  filename: Rectangle_4X4_nPoly1.xyz
-  polynomial degree: 1
+  filename: Rectangle_8X8_nPoly5.xyz
+  polynomial degree: 5
   O grid: False
   circular: False
   fully periodic boundaries: False
@@ -9,10 +9,10 @@ grid:
 solution:
   manufactured solution: True
   u:
-    polynomial degree: 1
+    polynomial degree: 5
     integration polynomial degree factor: 3
   p:
-    polynomial degree: 0
+    polynomial degree: 4
     integration polynomial degree factor: 3
   ordering: local # local|global ordering of u,v and p
 
@@ -37,7 +37,7 @@ solver:
     polynomial coarsening:
       enabled: True
       levels:
-        u: 4,3,2,1
+        u: 5,3,1
         # p: 4,3,2,1,0  should be extended with p-levels for Stokes multigrid 
       pre smoother:
         smoother: block_gauss_seidel_pyamg
@@ -52,7 +52,7 @@ solver:
     geometric coarsening:
       enabled: True
       use FVM: False
-      coarsening factors: 2,4 # 2,4,8,16 
+      coarsening factors: 2 # 2,4,8,16 
       pre smoother:
         smoother: block_gauss_seidel_pyamg
         direction: symmetric
@@ -88,7 +88,7 @@ problem:
   #   tag: Kovasznay
   multiply inverse mass matrix: True
   check condition number: False
-  check eigenvalues: True
+  check eigenvalues: False
   check consistency: False
   check characteristics: False
   check orthonormality: False
