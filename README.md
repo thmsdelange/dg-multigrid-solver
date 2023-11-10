@@ -1,7 +1,7 @@
 ![Static Badge](https://img.shields.io/badge/python-3.10_%7C_3.11_%7C_3.12-blue?logo=python&logoColor=white)
 
 # Multigrid DG solver
-This code was developed as part of my master's assignment titled "[Towards an Efficient Multigrid Algorithm for Solving Pressure-Robust Discontinuous Galerkin Formulations of the Stokes Problem](https://essay.utwente.nl/97483/)". The goal of the research was to develop a multigrid algorithm that can be applied to the discontinuous Galerkin (DG) discretization of the Stokes problem. However, the Poisson equation was used as the model problem for the multigrid algorithm. The DG discretization was implemented for both the Poisson and the Stokes problem.
+This code was developed as part of my master's assignment titled "[Towards an Efficient Multigrid Algorithm for Solving Pressure-Robust Discontinuous Galerkin Formulations of the Stokes Problem](https://essay.utwente.nl/97483/)". The goal of the research was to develop a multigrid algorithm that can be applied to the discontinuous Galerkin (DG) discretization of the Stokes problem. However, the Poisson equation was used as the model problem for the multigrid algorithm. The DG discretization was implemented for both the Poisson and Stokes problems using manufactured solutions (method of manufactured solutions, MMS).
 
 > This implementation is by no means a guideline of how a CFD program must be written, in the first place because it was written in Python. Moreover, the code was developed in an engineering context and not in the field of computer science. Of course, best practices in coding were followed as much as possible.
 
