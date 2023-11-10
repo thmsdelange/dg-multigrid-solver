@@ -107,11 +107,7 @@ class DGFEM:
         if self.settings.solver.method == 'multigrid':
             self.assemble_multigrid_operators()
         else:
-            # self.grids.append(geometry.initialize(self.P_sol))
             self.grids.append(Grid(self.geometry, self.vars, self.settings.solver.discretization).initialize(self.P_sol, self.sigma))
-            # self.grids[0:0] = [Grid(self.geometry, self.vars, discretization='fvm').initialize(self.P_sol, self.sigma)]
-            # self.grids.append(Grid(self.geometry, self.vars, 'fvm').initialize(self.P_sol, self.sigma))
-            # self.grids[0] = CoarseGrid(self.geometry, self.grids[0]).initialize(coarsening_factor=32)
 
         ### calculate exact solution in all grid elements on the reference grid
         reference_grid = self.grids[-1]
@@ -215,12 +211,6 @@ class DGFEM:
             u_nodal = np.ravel(u_modal)
             v_nodal = None
             p_nodal = None
-
-        # if self.settings.solver.method == 'smoother_amplification':
-        #     A = np.abs(u_nodal)
-        #     print(A[2,2,:,:])
-        #     exit()
-        # print(compute_Lp_norm(u_nodal, 2))
 
         ### calculating some error measurements
         abs_error_u = abs(u_nodal-self.u_exact_nodal)
@@ -367,8 +357,6 @@ class DGFEM:
                                                     np.array([0., 0., 0., 9.])/16.,
                                                     ])
                     restriction_operator = prolongation_operator.T/4.
-                    # restriction_operator *= 4.
-                    # prolongation_operator *= 4.
                 else:
                     self.grids[0:0] = [CoarseGrid(self.geometry, self.grids[0], self.vars).initialize(coarsening_factor=coarsening_factor) for coarsening_factor in coarsening_factors]
                     restriction_operator = np.array([np.array([1., 0., 0., 0., 1., 0., 0., 0., 1., 0., 0., 0., 1., 0., 0., 0.])/4.,
@@ -378,7 +366,6 @@ class DGFEM:
                                                     ])
                     prolongation_operator = restriction_operator.T*4.
 
-                # coarsening_factors_range = range(len(coarsening_factors)) if not self.settings.solver.multigrid.geometric_coarsening.use_FVM else range(len(coarsening_factors)-1)
                 self.solver.restriction_operators[0:0] = [restriction_operator for _ in range(len(coarsening_factors))]
                 self.solver.prolongation_operators[0:0] = [prolongation_operator for _ in range(len(coarsening_factors))]
 
@@ -387,11 +374,6 @@ class DGFEM:
         self.logger.debug("Multigrid levels:")
         for idx, grid in enumerate(self.grids):
             self.logger.debug(f'grid number {idx+1}: P_grid={grid.P_grid}, P_sol={grid.P_sol}, sigma={grid.sigma}, Ni={grid.Ni}, Nj={grid.Nj}')
-        # for idx, restriction_operator in enumerate(self.solver.restriction_operators):
-        #     print(f'restriction operator number {idx+1}: restriction_operator.shape=\n{restriction_operator.shape}')
-        #     # print(f'restriction operator number {idx+1}: restriction_operator=\n{restriction_operator}')
-        # exit()
-        
   
     def compute_exact_pressure_mean(self):
         x, y, r, theta = sym.symbols('x y r theta')
@@ -450,7 +432,6 @@ class DGFEM:
             sol_lambdas = {}
             for var_sol in sol.keys():
                 result = {}
-                # print(f'{sol.get(var_sol)=}')
                 for var in self.vars:
                     xii = xi.get(var) if isinstance(xi, dict) else xi
                     yii = yi.get(var) if isinstance(yi, dict) else yi
@@ -466,7 +447,6 @@ class DGFEM:
         elif which=='source_continuity':
             source_lambdas = {}
             for var in self.vars:
-                # print(f"{var}: {f}")
                 if isinstance(xi, dict): xii = xi.get(var)
                 if isinstance(yi, dict): yii = yi.get(var)
                 if isinstance(f_cont, sym.Number):
